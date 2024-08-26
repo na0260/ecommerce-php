@@ -18,21 +18,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout'])) {
 
 ?>
 
-<h1>Your Cart</h1>
-<ul>
-    <?php foreach ($cart->items as $productId => $quantity): ?>
-        <?php
-        foreach ($products as $product) {
-            if ($product->id == $productId) {
-                echo "<li>{$product->name} - Quantity: $quantity - Price: $" . ($product->price * $quantity) . "</li>";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="assets/styles.css"> <!-- Link to CSS -->
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <ul>
+        <?php foreach ($cart->items as $productId => $quantity): ?>
+            <?php
+            foreach ($products as $product) {
+                if ($product->id == $productId) {
+                    echo "<li>{$product->name} - Quantity: $quantity - Price: BDT " . ($product->price * $quantity) . "</li>";
+                }
             }
-        }
-        ?>
-    <?php endforeach; ?>
-</ul>
-<p>Total: $<?php echo $cart->getTotal($products); ?></p>
+            ?>
+        <?php endforeach; ?>
+    </ul>
+    <p>Total: BDT <?php echo $cart->getTotal($products); ?></p>
 
-<form method="post">
-    <button type="submit" name="checkout">Proceed to Checkout</button>
-</form>
-<a href="index.php">Continue Shopping</a>
+    <form method="post">
+        <button type="submit" name="checkout">Proceed to Checkout</button>
+    </form>
+    <a href="index.php">Continue Shopping</a>
+</body>
+</html>
